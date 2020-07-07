@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IMC</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+    <script src="/imcs.js"></script>
+</head>
+<body>
+<div class="jumbotron text-center" style="margin-bottom:0">
+    <h1>Medical Life
+        <i class="fas fa-heartbeat text-danger"></i></h1>
+    <p class="text-info"> A healthy mind in a healthy body</p>
+</div>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <a class="navbar-brand " href="#">IMC</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Calculator</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Statistica</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container mt-3">
+    <h1>IMC</h1>
+    <h6>IMC - este un indicator oficial de calculare a greutatii corporale ideale, pentru o inaltime data</h6>
+</div>
+<div class="container mt-3">
+    <div class="jumbotron text-center" style="margin-bottom:0">
+        <h2>Calculator IMC</h2>
+        <form action="/action_page.php">
+            <div class="form-check-inline">
+                <label class="form-check-label" for="check1">
+                    <input type="checkbox" class="form-check-input" id="check1" name="vehicle1" value="something" checked>
+                    <i class="fas fa-female"></i>
+                </label>
+            </div>
+            <div class="form-check-inline">
+                <label class="form-check-label" for="check2">
+                    <input type="checkbox" class="form-check-input" id="check2" name="vehicle2" value="something"><i class="fas fa-male"></i>
+                </label>
+            </div>
+        </form>
+        <form>
+            <div class="input-group mb-8">
+                <div class="input-group-prepend">
+                </div>
+            </div>
+        </form>
+
+        <div class="container mt-3">
+                <h3>ADAUGA IMC</h3>
+                <button type="button mb-3" class="btn btn-primary mb-3" data-toggle="modal" data-target="#addImcModal">Adauga</button>
+            <div class="container mb-3" style="margin-top:30px">
+                <div class="col-sm-12">
+                    <h4> Rezultat </h4>
+                </div>
+            </div>
+            </div>
+        <div class="container mb-8">
+            <label class="mr-sm-2 col-sm-2 "></label>
+            <h4>Statistica IMC</h4>
+            <table class="table table-striped mt-2">
+                <thead>
+                <tr>
+                    <th>nume</th>
+                    <th>inaltime</th>
+                    <th>greutate</th>
+                    <th>rezultat</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-th-each="imc: ${imcs}">
+                    <td>
+                        <a class="nav-Link text-dark" data-th-href="'/imcs/'+${imc.id}" data-th-text="${imc.nume}"></a>
+                    </td>
+                    <td data-th-text="${imc.inaltime}"></td>
+                    <td data-th-text="${imc.greutate}"></td>
+                    <td data-th-text="${imc.rezultat}"></td>
+                    <td>
+                        <div data-th-id="${imc.id}" style="cursor: pointer">
+                            <i class="fas fa-edit mr-2" data-target="#addImcModal" data-toggle="modal"></i>
+                            <i class="fas fa-trash-alt"></i>
+                        </div>
+                    </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        <div class="container" data-th-if="${showDetails}">
+            <hr>
+            <div class="card">
+                <div class="card-header" data-th-text="${selectedImc.nume}"></div>
+                <div class="card-body">
+                    <p>Inaltime: <span data-th-text="${selectedImc.inaltime}"></span></p>
+                    <p>Greutate: <span data-th-text="${selectedImc.greutate}"></span></p>
+                    <p>Rezultat: <span data-th-text="${selectedImc.rezultat}"></span></p>
+
+                    <table class="table table-sm border table-striped mt-3">
+                    <thead>
+                    <tr>
+                        <th>IMC</th>
+                        <th>Interpretare rezultat</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Intre 18,50 si 24,99</td>
+                        <td>Greutate normala</td>
+                    </tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="addImcModal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-nume">Add Imc</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="modal-imc-nume">Nume</label>
+                    <input type="text" id="modal-imc-nume" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <label for="modal-imc-inaltime">Inaltime</label>
+                    <input type="number" id="modal-imc-inaltime" class="form-control" min="60" max="200"/>
+                </div>
+                <div class="form-group">
+                    <label for="modal-imc-greutate">Greutate</label>
+                    <input type="number" id="modal-imc-greutate" class="form-control" min="50" max="120"/>
+                </div>
+                <div class="form-group">
+                    <label for="modal-imc-rezultat">Rezultat</label>
+                    <input type="number" id="modal-imc-rezultat" class="form-control" min="18" max="40"/>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-danger" data-dismiss="modal">Close</button>
+                <button class="btn btn-primary" id="modal-save-button" type="button" >Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
