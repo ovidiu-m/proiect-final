@@ -19,10 +19,10 @@ public class ProiectImcImcApplication {
     @Bean
     CommandLineRunner atStartup(ImcRepository repo) {
 		return args -> repo.saveAll(List.of(
-					new Imc("Ana", 160, 60, 23),
-					new Imc("Mihai", 190, 80, 22),
-					new Imc("George", 170, 70, 24),
-                    new Imc("Andrei",180,80,25)
+					new Imc("Ana", 160, 60),
+					new Imc("Mihai", 190, 80),
+					new Imc("George", 170, 70),
+                    new Imc("Andrei",180,80)
 			));
 		}
     }

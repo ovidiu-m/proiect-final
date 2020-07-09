@@ -3,6 +3,7 @@ package ro.fasttrack.proiectIMC.IMC.domain;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.text.DecimalFormat;
 import java.util.Objects;
 
 @Entity
@@ -15,9 +16,21 @@ public class Imc {
     private int greutate;
     private double rezultat;
 
+
     public Imc() {
 
     }
+
+
+    public Imc(String nume, double inaltime, int greutate) {
+        this.nume = nume;
+        this.inaltime = inaltime;
+        this.greutate = greutate;
+        calculeazaRezultat();
+
+
+    }
+
 
     public Imc(String nume, double inaltime, int greutate, double rezultat) {
         this.nume = nume;
@@ -65,6 +78,13 @@ public class Imc {
     public void setRezultat(double rezultat) {
         this.rezultat = rezultat;
     }
+
+
+    private void calculeazaRezultat() {
+        double totalImc = (greutate) / (Math.pow(inaltime, 2));
+        DecimalFormat imc = new DecimalFormat("0.##");
+    }
+
 
     @Override
     public boolean equals(Object o) {
