@@ -31,7 +31,7 @@ public class ImcService {
     }
 
     public Imc addImc(Imc newImc) {
-        return imcRepository.save(newImc);
+        return imcRepository.save(new Imc(newImc.getNume(), newImc.getInaltime(), newImc.getGreutate()));
     }
 
     public Imc deleteImc(int id) {
@@ -39,6 +39,7 @@ public class ImcService {
         imcRepository.deleteById(id);
         return imc;
     }
+
     public Imc replaceImc(int id, Imc imc) {
         imc.setId(id);
         return imcRepository.save(imc);

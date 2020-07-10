@@ -7,9 +7,29 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
     <script src="/imcs.js"></script>
+    <style>
+        .carousel-inner img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .carousel-container {
+            position: relative;
+        }
+
+        .imc-container {
+            position: absolute;;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .imc-jumbotron {
+            background-color: rgba(255,255,255,0.9);
+        }
+    </style>
 </head>
 <body>
 <div class="jumbotron text-center" style="margin-bottom:0">
@@ -33,133 +53,149 @@
         </ul>
     </div>
 </nav>
-<div class="container mt-3">
-    <h1>IMC</h1>
-    <h6>IMC - este un indicator oficial de calculare a greutatii corporale ideale, pentru o inaltime data</h6>
-</div>
-<div class="container mt-3">
-    <div class="jumbotron text-center" style="margin-bottom:0">
-        <h2>Calculator IMC</h2>
-        <form action="/action_page.php">
-            <div class="form-check-inline">
-                <label class="form-check-label" for="check1">
-                    <input type="checkbox" class="form-check-input" id="check1" name="vehicle1" value="something" checked>
-                    <i class="fas fa-female"></i>
-                </label>
-            </div>
-            <div class="form-check-inline">
-                <label class="form-check-label" for="check2">
-                    <input type="checkbox" class="form-check-input" id="check2" name="vehicle2" value="something"><i class="fas fa-male"></i>
-                </label>
-            </div>
-        </form>
-        <form>
-            <div class="input-group mb-8">
-                <div class="input-group-prepend">
+<div class="carousel-container">
+    <div id="demo" class="carousel slide" data-ride="carousel">
+        <ul class="carousel-indicators">
+            <li data-target="#demo" data-slide-to="0" class="active"></li>
+            <li data-target="#demo" data-slide-to="1"></li>
+            <li data-target="#demo" data-slide-to="2"></li>
+        </ul>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://www.verywellfit.com/thmb/m40rcNEj5ZfghC8Y0NJggFBPBGM=/2119x1192/smart/filters:no_upscale()/GettyImages-848079198-5af08caea18d9e0037582da7.jpg" alt="Los Angeles" width="1100" height="500">
+                <div class="carousel-caption">
                 </div>
             </div>
-        </form>
+            <div class="carousel-item">
+                <img src="https://www.inquirer.com/resizer/VJYizXX4177Nlh8mxhzwAELw10g=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/OE6KWB5EMBAJLCEEJ2YNAVEM6A.jpg" alt="Chicago" width="1100" height="500">
+                <div class="carousel-caption">
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://thedoctorweighsin.com/wp-content/uploads/2017/07/IMG-Food-as-Medicine.jpg" alt="New York" width="1100" height="500">
+                <div class="carousel-caption">
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#demo" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </a>
+    </div>
+    <div class="container imc-container">
 
-        <div class="container mt-3">
+        <div class="imc-jumbotron jumbotron text-center" style="margin-bottom:0">
+            <h2>Calculator IMC</h2>
+            <form action="/action_page.php">
+            </form>
+            <form>
+                <div class="input-group mb-8">
+                    <div class="input-group-prepend">
+                    </div>
+                </div>
+            </form>
+
+            <div class="container mt-3">
                 <h3>ADAUGA IMC</h3>
                 <button type="button mb-3" class="btn btn-primary mb-3" data-toggle="modal" data-target="#addImcModal">Adauga</button>
-            <div class="container mb-3" style="margin-top:30px">
-                <div class="col-sm-12">
-                    <h4> Rezultat </h4>
+                <div class="container mb-3" style="margin-top:30px">
+                    <div class="col-sm-12">
+                    </div>
                 </div>
             </div>
-            </div>
-        <div class="container mb-8">
-            <label class="mr-sm-2 col-sm-2 "></label>
-            <h4>Statistica IMC</h4>
-            <table class="table table-striped mt-2">
-                <thead>
-                <tr>
-                    <th>nume</th>
-                    <th>inaltime</th>
-                    <th>greutate</th>
-                    <th>rezultat</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr data-th-each="imc: ${imcs}">
-                    <td>
-                        <a class="nav-Link text-dark" data-th-href="'/imcs/'+${imc.id}" data-th-text="${imc.nume}"></a>
-                    </td>
-                    <td data-th-text="${imc.inaltime}"></td>
-                    <td data-th-text="${imc.greutate}"></td>
-                    <td data-th-text="${imc.rezultat}"></td>
-                    <td>
-                        <div data-th-id="${imc.id}" style="cursor: pointer">
-                            <i class="fas fa-edit mr-2" data-target="#addImcModal" data-toggle="modal"></i>
-                            <i class="fas fa-trash-alt"></i>
-                        </div>
-                    </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-        <div class="container" data-th-if="${showDetails}">
-            <hr>
-            <div class="card">
-                <div class="card-header" data-th-text="${selectedImc.nume}"></div>
-                <div class="card-body">
-                    <p>Inaltime: <span data-th-text="${selectedImc.inaltime}"></span></p>
-                    <p>Greutate: <span data-th-text="${selectedImc.greutate}"></span></p>
-                    <p>Rezultat: <span data-th-text="${selectedImc.rezultat}"></span></p>
-
-                    <table class="table table-sm border table-striped mt-3">
+            <div class="container mb-8">
+                <label class="mr-sm-2 col-sm-2 "></label>
+                <h4>Statistica IMC</h4>
+                <table class="table table-striped mt-2">
                     <thead>
                     <tr>
-                        <th>IMC</th>
-                        <th>Interpretare rezultat</th>
+                        <th>nume</th>
+                        <th>inaltime</th>
+                        <th>greutate</th>
+                        <th>rezultat</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>Intre 18,50 si 24,99</td>
-                        <td>Greutate normala</td>
+                    <tr data-th-each="imc: ${imcs}">
+                        <td>
+                            <a class="nav-Link text-dark" data-th-href="'/imcs/'+${imc.id}" data-th-text="${imc.nume}"></a>
+                        </td>
+                        <td data-th-text="${imc.inaltime}"></td>
+                        <td data-th-text="${imc.greutate}"></td>
+                        <td data-th-text="${imc.rezultat}"></td>
+                        <td>
+                            <div data-th-id="${imc.id}" style="cursor: pointer">
+                                <i class="fas fa-edit mr-2" data-target="#addImcModal" data-toggle="modal"></i>
+                                <i class="fas fa-trash-alt"></i>
+                            </div>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
-                </div>
             </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="addImcModal">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-nume">Add Imc</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label for="modal-imc-nume">Nume</label>
-                    <input type="text" id="modal-imc-nume" class="form-control"/>
-                </div>
-                <div class="form-group">
-                    <label for="modal-imc-inaltime">Inaltime</label>
-                    <input type="number" id="modal-imc-inaltime" class="form-control" min="60" max="200"/>
-                </div>
-                <div class="form-group">
-                    <label for="modal-imc-greutate">Greutate</label>
-                    <input type="number" id="modal-imc-greutate" class="form-control" min="50" max="120"/>
-                </div>
-                <div class="form-group">
-                    <label for="modal-imc-rezultat">Rezultat</label>
-                    <input type="number" id="modal-imc-rezultat" class="form-control" min="18" max="40"/>
-                </div>
+            <div class="container" data-th-if="${showDetails}">
+                <hr>
+                <div class="card">
+                    <div class="card-header" data-th-text="${selectedImc.nume}"></div>
+                    <div class="card-body">
+                        <p>Inaltime: <span data-th-text="${selectedImc.inaltime}"></span></p>
+                        <p>Greutate: <span data-th-text="${selectedImc.greutate}"></span></p>
+                        <p>Rezultat: <span data-th-text="${selectedImc.rezultat}"></span></p>
 
+                        <table class="table table-sm border table-striped mt-3">
+                            <thead>
+                            <tr>
+                                <th>IMC</th>
+                                <th>Interpretare rezultat</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td data-th-text="${verdict.intervalGreutate}"></td>
+
+                                <td data-th-text="${verdict.verdictGreutate}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn-danger" data-dismiss="modal">Close</button>
-                <button class="btn btn-primary" id="modal-save-button" type="button" >Save</button>
+        </div>
+
+    </div>
+    <div class="modal fade" id="addImcModal">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-nume">Add Imc</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="modal-imc-nume">Nume</label>
+                        <input type="text" id="modal-imc-nume" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="modal-imc-inaltime">Inaltime</label>
+                        <input type="number" id="modal-imc-inaltime" class="form-control" min="60" max="200"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="modal-imc-greutate">Greutate</label>
+                        <input type="number" id="modal-imc-greutate" class="form-control" min="50" max="120"/>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-danger" data-dismiss="modal">Close</button>
+                    <button class="btn btn-primary" id="modal-save-button" type="button" >Save</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
 </body>
 </html>

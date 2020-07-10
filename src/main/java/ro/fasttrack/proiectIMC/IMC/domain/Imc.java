@@ -1,5 +1,7 @@
 package ro.fasttrack.proiectIMC.IMC.domain;
 
+import org.springframework.aop.aspectj.SingletonAspectInstanceFactory;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -16,27 +18,20 @@ public class Imc {
     private int greutate;
     private double rezultat;
 
-
     public Imc() {
-
+        this(null, 0, 0, 0);
     }
-
 
     public Imc(String nume, double inaltime, int greutate) {
-        this.nume = nume;
-        this.inaltime = inaltime;
-        this.greutate = greutate;
-        calculeazaRezultat();
-
-
+        this(nume, inaltime, greutate, 0);
     }
-
 
     public Imc(String nume, double inaltime, int greutate, double rezultat) {
         this.nume = nume;
         this.inaltime = inaltime;
         this.greutate = greutate;
         this.rezultat = rezultat;
+        calculeazaRezultat();
     }
 
     public String getNume() {
@@ -79,10 +74,9 @@ public class Imc {
         this.rezultat = rezultat;
     }
 
-
     private void calculeazaRezultat() {
-        double totalImc = (greutate) / (Math.pow(inaltime, 2));
-        DecimalFormat imc = new DecimalFormat("0.##");
+        double valImc = getGreutate() / Math.pow(getInaltime(), 2);
+        setRezultat(Math.round(valImc));
     }
 
 
